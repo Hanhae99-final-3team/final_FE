@@ -11,7 +11,6 @@ import {
   doubleListToZero,
 } from '../../../redux/modules/market/postSlice';
 import option from './Option';
-import Select from '../../elements/GlobalSelect';
 
 const MainContainer = () => {
   const dispatch = useDispatch();
@@ -29,7 +28,6 @@ const MainContainer = () => {
   const item = useSelector((state) => state.marketPost.itemCategory);
   const categoryPage = useSelector((state) => state.marketPost.page);
 
-  console.log(doubleList);
   const [state, setState] = useState('');
   const [page, setPage] = useState(0);
   const lastIntersectingData = useRef(null);
@@ -88,20 +86,19 @@ const MainContainer = () => {
       dispatch(__getItemCategories({ itemCategory: itemCategory, page: page }));
     }
     if (petCategory !== null && itemCategory !== null) {
-      console.log('mainContainer');
-      if (petCategory === '모두') {
+      if (petCategory === '모두' && itemCategory !== null) {
         dispatch(
           __getItemCategories({ itemCategory: itemCategory, page: page })
         );
+      } else {
+        dispatch(
+          getTwoCategory({
+            itemCategory: itemCategory,
+            page: page,
+            petCategory: petCategory,
+          })
+        );
       }
-
-      dispatch(
-        getTwoCategory({
-          itemCategory: itemCategory,
-          page: page,
-          petCategory: petCategory,
-        })
-      );
     }
   }, [page, dispatch, petCategory, itemCategory]);
 
@@ -132,6 +129,7 @@ const MainContainer = () => {
       }
     }
     return () => observer && observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     lastIntersectingData,
     list,
@@ -168,7 +166,6 @@ const MainContainer = () => {
               </option>
             ))}
           </STselect>
-          {/* <Select optionDatas={option} setSelected={setSelected} /> */}
         </div>
       </STsection>
       <ItemList

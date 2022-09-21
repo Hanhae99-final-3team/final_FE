@@ -85,11 +85,10 @@ export const getTwoCategory = createAsyncThunk(
       );
       // localStorage.removeItem('petCategory');
       // localStorage.removeItem('itemCategory');
-      if (response.data.length === 0) {
-        localStorage.removeItem('petCategory');
-        localStorage.removeItem('itemCategory');
-        return;
-      }
+      // if (response.data.length === 0) {
+      //   localStorage.removeItem('petCategory');
+      //   localStorage.removeItem('itemCategory');
+      //   return;
       return thunkAPI.fulfillWithValue(response.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -325,6 +324,7 @@ export const postSlice = createSlice({
       state.isLoading = false;
       state.list = [];
       state.doubleList = state.doubleList.concat(action.payload);
+      console.log(action.payload);
     },
     [getTwoCategory.rejected]: (state, action) => {
       state.isLoading = false;
