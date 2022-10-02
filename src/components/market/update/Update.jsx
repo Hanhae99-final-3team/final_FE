@@ -60,7 +60,6 @@ function Update() {
       sellingPrice: formData.sellingPrice,
     };
     dispatch(__updatePost({ id, data, itemCategory, petCategory, files }));
-    console.log(items);
     navigate(`/market/detail/${id}`, { items });
   };
 

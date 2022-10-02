@@ -12,12 +12,10 @@ const api = "http://43.200.179.217:8080";
 export const getData = createAsyncThunk(
   "mainFilter/getData",
   async (payload, thunkApi) => {
-    console.log(payload);
     try {
       const response = await axios.get(
         `https://fabius-bk.shop/items/petcategory?petCategory=${payload.state}?page=0&size=10`
       );
-      console.log(response);
       return thunkApi.fulfillWithValue(response.data);
     } catch (error) {
       console.log(error);

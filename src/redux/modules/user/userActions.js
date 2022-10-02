@@ -1,20 +1,19 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { apis } from '../../../shared/axios';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { apis } from "../../../shared/axios";
 
 const URL = {
   BASE: process.env.REACT_APP_BASE_URL,
 };
 
 export const userLogin = createAsyncThunk(
-  'user/login',
+  "user/login",
   async (payload, { getState, rejectWithValue }) => {
-    console.log(payload);
     const { user } = getState();
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       };
 
@@ -23,9 +22,8 @@ export const userLogin = createAsyncThunk(
         payload,
         config
       );
-      localStorage.setItem('access-token', response.headers.authorization);
-      localStorage.setItem('refresh-token', response.headers.refreshtoken);
-      console.log(response);
+      localStorage.setItem("access-token", response.headers.authorization);
+      localStorage.setItem("refresh-token", response.headers.refreshtoken);
       return response;
     } catch (error) {
       // return custom error message from API if any
@@ -39,13 +37,12 @@ export const userLogin = createAsyncThunk(
 );
 
 export const registerUser = createAsyncThunk(
-  'user/register',
-  async (payload, { rejectWithValue }) => {
-    console.log(payload);
+  "user/register",
+  async (payload, { rejectWithValue, fulfillWithValue }) => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       };
       const response = await axios.post(
@@ -53,7 +50,7 @@ export const registerUser = createAsyncThunk(
         payload,
         config
       );
-      console.log(response);
+      return fulfillWithValue(response.data);
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
@@ -66,7 +63,7 @@ export const registerUser = createAsyncThunk(
 
 // 유저 로그아웃
 export const logoutUser = createAsyncThunk(
-  'user/logout',
+  "user/logout",
   async (arg, { getState, rejectWithValue, fulfillWithValue }) => {
     const { user } = getState();
     try {
@@ -103,12 +100,12 @@ export const kakaoLogin = createAsyncThunk(
 );
 
 export const existMemberId = createAsyncThunk(
-  'user/existMemberId',
+  "user/existMemberId",
   async (payload, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       };
       const response = await axios.post(
@@ -116,7 +113,6 @@ export const existMemberId = createAsyncThunk(
         payload,
         config
       );
-      console.log(response);
       return response;
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -129,13 +125,12 @@ export const existMemberId = createAsyncThunk(
 );
 
 export const existMemberNickname = createAsyncThunk(
-  'user/existMemberNickname',
+  "user/existMemberNickname",
   async (payload, { rejectWithValue }) => {
-    console.log(payload);
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       };
       const response = await axios.post(
@@ -143,7 +138,6 @@ export const existMemberNickname = createAsyncThunk(
         payload,
         config
       );
-      console.log(response);
       return response;
     } catch (error) {
       if (error.response && error.response.data.message) {

@@ -29,7 +29,6 @@ const MainContainer = () => {
   const item = useSelector((state) => state.marketPost.itemCategory);
   const categoryPage = useSelector((state) => state.marketPost.page);
 
-  console.log(doubleList);
   const [state, setState] = useState("");
   const [page, setPage] = useState(0);
   const lastIntersectingData = useRef(null);
@@ -55,7 +54,6 @@ const MainContainer = () => {
   const onIntersect = (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        console.log("!?!?!?");
         setPage((page) => page + 1);
         dispatch(addPage());
         // 현재 타겟을 observe한다.
@@ -84,7 +82,6 @@ const MainContainer = () => {
       dispatch(__getItemCategories({ itemCategory: itemCategory, page: page }));
     }
     if (petCategory !== null && itemCategory !== null) {
-      console.log("mainContainer");
       if (petCategory === "모두") {
         dispatch(
           __getItemCategories({ itemCategory: itemCategory, page: page })

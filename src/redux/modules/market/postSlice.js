@@ -66,7 +66,6 @@ export const __getItemCategories = createAsyncThunk(
       const res = await axios.get(
         `https://fabius-bk.shop/items?itemCategory=${arg.itemCategory}&page=${arg.page}`
       );
-      console.log(res);
       if (!res.data) {
         return;
       }
