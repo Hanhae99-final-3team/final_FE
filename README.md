@@ -73,6 +73,14 @@
 <hr>
 <br>
 
+## ✒ 와이어 프레임 
+
+### [Figma 보러가기](https://www.figma.com/file/pLhrh3vz02TEvk94xHZm7w/8%EA%B8%B0_4%EC%A1%B0_%EB%A9%8D%EB%83%A5%EB%A7%88%EC%BC%93?node-id=0%3A1)
+
+<br>
+<hr>
+<br>
+
 ## 🔰 사용한 패키지와 버전
 
 ```
